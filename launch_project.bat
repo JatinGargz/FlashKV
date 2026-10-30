@@ -2,8 +2,8 @@
 title FlashKV Auth Gateway — Ephemeral In-Memory 2FA System
 cls
 echo ===============================================================
-echo   FlashKV Auth Gateway: Dual-Portal In-Memory 2FA System
-echo   Team RediSetGo -- Evaluator: Dr. Gunjan Chugh
+echo   Team RediSetGo: Jatin Garg (25/CS/174) & Kanav Gupta (25/CS/187)
+echo   Evaluator: Dr. Gunjan Chugh -- DTU CSE 2nd Year
 echo ===============================================================
 echo.
 echo [1/2] Starting C++ In-Memory Storage Daemon (Port 6379)...

@@ -8,6 +8,7 @@ bin/
 *.ilk
 *.lib
 *.dll
+*.zip
 
 # CMake artifacts
 CMakeCache.txt

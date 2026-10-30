@@ -2,7 +2,8 @@
 setlocal
 echo ===============================================================
 echo   Building FlashKV C++ Binaries with GCC / G++ (Static Link)
-echo   Evaluator: Dr. Gunjan Chugh ^| Team RediSetGo
+echo   Team RediSetGo: Jatin Garg (25/CS/174) & Kanav Gupta (25/CS/187)
+echo   Evaluator: Dr. Gunjan Chugh ^| DTU CSE 2nd Year
 echo ===============================================================
 echo.
 

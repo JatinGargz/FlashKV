@@ -3,7 +3,9 @@
 **Project:** FlashKV — High-Performance In-Memory Key-Value Store & Ephemeral 2FA Auth Gateway  
 **Evaluator:** Dr. Gunjan Chugh  
 **Course:** B.Tech Computer Science & Engineering (2nd Year)  
+**College:** Delhi Technological University (DTU)  
 **Team:** RediSetGo  
+**Team Members:** Jatin Garg (Roll No. 25/CS/174) & Kanav Gupta (Roll No. 25/CS/187)  
 **Live Production URL:** [https://flashkv-auth.vercel.app](https://flashkv-auth.vercel.app)  
 
 ---

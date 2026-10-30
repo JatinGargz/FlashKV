@@ -7,6 +7,9 @@
 
 An industrial-grade, multi-threaded in-memory key-value database engine (Mini-Redis) written in **Modern C++ (C++17)** with an integrated **Dual-Portal Ephemeral 2FA Web Console**.
 
+- **Team RediSetGo:** Jatin Garg (Roll No. 25/CS/174) & Kanav Gupta (Roll No. 25/CS/187)
+- **Institution:** Delhi Technological University (DTU) | B.Tech CSE 2nd Year
+- **Academic Evaluator:** Dr. Gunjan Chugh
 - **Production Cloud Deployment:** [https://flashkv-auth.vercel.app/](https://flashkv-auth.vercel.app/)
 - **Receiver Verification Screen:** [https://flashkv-auth.vercel.app/verify](https://flashkv-auth.vercel.app/verify)
 - **Academic Project Brief (2-Page PDF):** [`06_academic_reports/FlashKV_Brief_Project_Report.pdf`](file:///C:/Users/Jatin/.gemini/antigravity/scratch/flashkv/06_academic_reports/FlashKV_Brief_Project_Report.pdf)
