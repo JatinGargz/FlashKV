@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mini-Redis Project Applications Portfolio</title>
+<style>
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #1E293B;
+    background: #FFFFFF;
+    line-height: 1.45;
+    font-size: 9.5pt;
+  }
+
+  /* ── Header ── */
+  .doc-header {
+    border-bottom: 2px solid #2563EB;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .doc-title-group h1 {
+    font-size: 18pt;
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+    margin-bottom: 2px;
+  }
+  .doc-title-group p {
+    font-size: 9.5pt;
+    color: #475569;
+    font-weight: 500;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 8.5pt;
+    color: #64748B;
+    line-height: 1.35;
+  }
+  .doc-meta strong {
+    color: #0F172A;
+  }
+
+  /* ── Executive Box ── */
+  .exec-box {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-left: 4px solid #2563EB;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 9pt;
+  }
+  .exec-box p {
+    color: #334155;
+  }
+  .exec-box strong {
+    color: #0F172A;
+  }
+
+  /* ── Core Engine Foundation ── */
+  .engine-banner {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .engine-banner-text h3 {
+    font-size: 10.5pt;
+    color: #1E40AF;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .engine-banner-text p {
+    font-size: 8.5pt;
+    color: #3B82F6;
+  }
+  .engine-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .engine-pill {
+    background: #FFFFFF;
+    border: 1px solid #93C5FD;
+    color: #1D4ED8;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 7.5pt;
+    font-weight: 700;
+    font-family: monospace;
+  }
+
+  /* ── Section Title ── */
+  .section-heading {
+    font-size: 12pt;
+    font-weight: 800;
+    color: #0F172A;
+    border-bottom: 1px solid #E2E8F0;
+    padding-bottom: 4px;
+    margin: 16px 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── Idea Cards ── */
+  .idea-card {
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+    background: #FFFFFF;
+  }
+  .idea-card.featured {
+    border: 1.5px solid #2563EB;
+    background: #FAFCFF;
+  }
+  .idea-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .idea-title-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .idea-number {
+    background: #2563EB;
+    color: #FFFFFF;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8pt;
+    font-weight: 800;
+  }
+  .idea-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0F172A;
+  }
+  .status-badge {
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 7.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .status-ready {
+    background: #DCFCE7;
+    color: #15803D;
+    border: 1px solid #86EFAC;
+  }
+  .status-concept {
+    background: #F1F5F9;
+    color: #475569;
+    border: 1px solid #CBD5E1;
+  }
+
+  .idea-tagline {
+    font-size: 8.5pt;
+    color: #64748B;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .idea-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+    font-size: 8.5pt;
+  }
+  .idea-col h4 {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .idea-col ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .idea-col li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 3px;
+    color: #334155;
+  }
+  .idea-col li::before {
+    content: "•";
+    color: #2563EB;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  .code-chip {
+    font-family: monospace;
+    background: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    color: #0F172A;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 8pt;
+  }
+
+  /* ── Comparison Table ── */
+  .table-wrap {
+    margin-top: 10px;
+    page-break-inside: avoid;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8pt;
+  }
+  th, td {
+    padding: 7px 10px;
+    border: 1px solid #CBD5E1;
+    text-align: left;
+  }
+  th {
+    background: #F8FAFC;
+    color: #0F172A;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 7.5pt;
+    letter-spacing: 0.03em;
+  }
+  tr:nth-child(even) td {
+    background: #F8FAFC;
+  }
+  .td-bold {
+    font-weight: 700;
+    color: #0F172A;
+  }
+  .ready-star {
+    color: #16A34A;
+    font-weight: 800;
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    margin-top: 20px;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.5pt;
+    color: #94A3B8;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Document Header -->
+  <div class="doc-header">
+    <div class="doc-title-group">
+      <h1>Project Portfolio: Mini-Redis Application Layer</h1>
+      <p>5 Real-World Industry Applications Powered by a Custom C++ In-Memory Engine</p>
+    </div>
+    <div class="doc-meta">
+      <div><strong>Course:</strong> B.Tech 2nd Year CSE</div>
+      <div><strong>Evaluator:</strong> Dr. Gunjan Chugh</div>
+      <div><strong>Team Name:</strong> RediSetGo</div>
+      <div><strong>Date:</strong> October 2026</div>
+    </div>
+  </div>
+
+  <!-- Executive Summary -->
+  <div class="exec-box">
+    <p><strong>Executive Purpose:</strong> This document presents 5 distinct real-world software applications designed to run on top of our custom <strong>Mini-Redis C++ in-memory database engine</strong>. While standard database projects only perform basic terminal CRUD, these applications demonstrate practical utility in production systems (microsecond caching, session token authentication, traffic rate-limiting, and ephemeral storage) for college evaluation.</p>
+  </div>
+
+  <!-- The Core Engine Banner -->
+  <div class="engine-banner">
+    <div class="engine-banner-text">
+      <h3>The Common Foundation: High-Performance C++17 Core Engine</h3>
+      <p>Every application below connects directly over raw TCP sockets (Port 6379) to our C++ database engine.</p>
+    </div>
+    <div class="engine-badges">
+      <span class="engine-pill">O(1) LRU Cache</span>
+      <span class="engine-pill">Doubly Linked List</span>
+      <span class="engine-pill">Thread Pool (POSIX/Win)</span>
+      <span class="engine-pill">AOF Durability</span>
+      <span class="engine-pill">0.018 ms Latency</span>
+    </div>
+  </div>
+
+  <div class="section-heading">Application Architectures Portfolio</div>
+
+  <!-- IDEA 1: URL Shortener -->
+  <div class="idea-card featured">
+    <div class="idea-card-header">
+      <div class="idea-title-box">
+        <span class="idea-number">1</span>
+        <span class="idea-title">High-Performance URL Shortener & Analytics Platform (Bitly Style)</span>
+      </div>
+      <span class="status-badge status-ready">&#x2713; Fully Built &amp; Live</span>
+    </div>
+    <div class="idea-tagline">Real-world analogue: Bitly, TinyURL &mdash; Sub-millisecond URL redirection with memory-bounded caching</div>
+    
+    <p style="font-size: 8.5pt; color: #334155; margin-bottom: 6px;">
+      Users input long URLs to generate concise short links (<span class="code-chip">/s/linux-kernel</span>). When requested, the service performs an in-memory lookup in 0.018ms, increments real-time click analytics, and executes an instant HTTP 302 redirect. Links support auto-expiry (TTL) and live QR code generation.
+    </p>
+
+    <div class="idea-grid">
+      <div class="idea-col">
+        <h4>How it Uses Mini-Redis C++ Engine:</h4>
+        <ul>
+          <li><span class="code-chip">SET url:&lt;code&gt; &lt;dest&gt; EX &lt;ttl&gt;</span>: Stores destination in RAM with optional auto-expiry.</li>
+          <li><span class="code-chip">GET url:&lt;code&gt;</span>: Constant-time O(1) resolution during HTTP 302 redirect.</li>
+          <li><span class="code-chip">INCR clicks:&lt;code&gt;</span>: Real-time atomic analytics counter per short link.</li>
+          <li><span class="code-chip">LRU Eviction</span>: Drops least-accessed links when memory capacity is reached.</li>
+        </ul>
+      </div>
+      <div class="idea-col">
+        <h4>Live Demonstration Highlights for Professor:</h4>
+        <ul>
+          <li><strong>Instant 302 Redirect:</strong> Browser redirects in &lt; 1 ms from C++ RAM.</li>
+          <li><strong>Real-Time Clicks Tracker:</strong> Click counter increments live on dashboard.</li>
+          <li><strong>Phone QR Scanner:</strong> Evaluator can scan generated QR code on mobile camera.</li>
+          <li><strong>TTL Auto-Purge:</strong> 1-minute demo links disappear live as countdown reaches 0.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- IDEA 2: Rate Limiter -->
+  <div class="idea-card">
+    <div class="idea-card-header">
+      <div class="idea-title-box">
+        <span class="idea-number">2</span>
+        <span class="idea-title">API Rate Limiter & Anti-Spam Security Shield (Cloudflare Style)</span>
+      </div>
+      <span class="status-badge status-concept">Ready to Implement</span>
+    </div>
+    <div class="idea-tagline">Real-world analogue: Cloudflare, Stripe API Gateways &mdash; Traffic shaping and DDoS prevention</div>
+
+    <p style="font-size: 8.5pt; color: #334155; margin-bottom: 6px;">
+      An API gateway middleware that protects web servers from brute-force attacks and request spamming. Each client IP address is restricted to a fixed quota (e.g., max 10 requests per minute). Requests exceeding the quota receive an immediate HTTP 429 Too Many Requests response.
+    </p>
+
+    <div class="idea-grid">
+      <div class="idea-col">
+        <h4>How it Uses Mini-Redis C++ Engine:</h4>
+        <ul>
+          <li><span class="code-chip">SET rate:&lt;ip&gt; 1 EX 60</span>: Initializes request counter with 60s sliding window.</li>
+          <li><span class="code-chip">INCR rate:&lt;ip&gt;</span>: Atomically tracks hit counts per incoming client request.</li>
+          <li><span class="code-chip">TTL rate:&lt;ip&gt;</span>: Checks remaining window time before counter resets.</li>
+          <li><span class="code-chip">Multi-threading</span>: Thread-safe mutexes handle high-concurrency attack spikes.</li>
+        </ul>
+      </div>
+      <div class="idea-col">
+        <h4>Live Demonstration Highlights for Professor:</h4>
+        <ul>
+          <li><strong>Live Flooder Test:</strong> Rapidly click a button 15 times in 5 seconds.</li>
+          <li><strong>Security Lockout:</strong> First 10 requests pass green; 11th triggers a red 429 Blocked card.</li>
+          <li><strong>Auto-Unlock Countdown:</strong> Live visual timer counts down until the client is unbanned.</li>
+          <li><strong>Systems Value:</strong> Directly demonstrates cybersecurity and traffic engineering.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- IDEA 3: Real-Time Chat -->
+  <div class="idea-card">
+    <div class="idea-card-header">
+      <div class="idea-title-box">
+        <span class="idea-number">3</span>
+        <span class="idea-title">Real-Time Multi-User Chat & Session Store (Discord / Slack Style)</span>
+      </div>
+      <span class="status-badge status-concept">Ready to Implement</span>
+    </div>
+    <div class="idea-tagline">Real-world analogue: Discord, WhatsApp Web &mdash; Ephemeral messaging and authentication session tokens</div>
+
+    <p style="font-size: 8.5pt; color: #334155; margin-bottom: 6px;">
+      A collaborative real-time messaging platform where user login sessions and recent conversation channels are held entirely in memory. If a user remains idle, their session token automatically expires. Message logs remain ephemeral in RAM without slow disk write overhead.
+    </p>
+
+    <div class="idea-grid">
+      <div class="idea-col">
+        <h4>How it Uses Mini-Redis C++ Engine:</h4>
+        <ul>
+          <li><span class="code-chip">SET session:&lt;token&gt; &lt;user&gt; EX 300</span>: Ephemeral authentication session token.</li>
+          <li><span class="code-chip">RPUSH channel:&lt;id&gt; &lt;msg&gt;</span>: Fast in-memory message history buffer.</li>
+          <li><span class="code-chip">Active TTL Sweep</span>: Background cleaner automatically purges inactive sessions.</li>
+          <li><span class="code-chip">TCP Sockets</span>: Socket connections handle concurrent chat participant streams.</li>
+        </ul>
+      </div>
+      <div class="idea-col">
+        <h4>Live Demonstration Highlights for Professor:</h4>
+        <ul>
+          <li><strong>Multi-Window Chat:</strong> Open two browser tabs side-by-side chatting in real time.</li>
+          <li><strong>Session Invalidation:</strong> Expire a session token to show security logout live.</li>
+          <li><strong>Zero Disk Lag:</strong> Demonstrates why chatting systems prefer in-memory engines over SQL.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- IDEA 4: Gaming Leaderboard -->
+  <div class="idea-card">
+    <div class="idea-card-header">
+      <div class="idea-title-box">
+        <span class="idea-number">4</span>
+        <span class="idea-title">Live Gaming Leaderboard & Real-Time Scoreboard (BGMI / Chess.com Style)</span>
+      </div>
+      <span class="status-badge status-ready">&#x2605; Built &amp; Live</span>
+    </div>
+    <div class="idea-tagline">Real-world analogue: BGMI, Chess.com, HackerRank &mdash; Millisecond ranking updates under heavy concurrent load</div>
+
+    <p style="font-size: 8.5pt; color: #334155; margin-bottom: 6px;">
+      A live competitive scoreboard that dynamically ranks active players based on scores. Traditional databases lock up when hundreds of players score simultaneously; Mini-Redis updates player rankings in memory and computes the top-10 leaderboard with zero perceptible latency.
+    </p>
+
+    <div class="idea-grid">
+      <div class="idea-col">
+        <h4>How it Uses Mini-Redis C++ Engine:</h4>
+        <ul>
+          <li><span class="code-chip">SET lb:score:&lt;id&gt; &lt;score&gt;</span>: Instant in-memory score tracking.</li>
+          <li><span class="code-chip">LRU Ranking Chain</span>: Visualizes top players ordered dynamically by score.</li>
+          <li><span class="code-chip">AOF Durability</span>: Prevents tournament data loss if game server restarts.</li>
+        </ul>
+      </div>
+      <div class="idea-col">
+        <h4>Live Demonstration Highlights for Professor:</h4>
+        <ul>
+          <li><strong>Live Rank Shuffling:</strong> Increment a player's score and watch their card slide up.</li>
+          <li><strong>Simulated Match:</strong> Click "Simulate Match" to inject 100 concurrent score updates.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- IDEA 5: Ephemeral OTP Service -->
+  <div class="idea-card">
+    <div class="idea-card-header">
+      <div class="idea-title-box">
+        <span class="idea-number">5</span>
+        <span class="idea-title">Ephemeral OTP & 2-Factor Authentication Service (Zomato / Uber Style)</span>
+      </div>
+      <span class="status-badge status-ready">&#x2605; Built &amp; Live</span>
+    </div>
+    <div class="idea-tagline">Real-world analogue: Zomato, Uber, Banking OTPs &mdash; Secure single-use verification tokens</div>
+
+    <p style="font-size: 8.5pt; color: #334155; margin-bottom: 6px;">
+      Simulates an enterprise OTP service. When a user requests a login code, a 6-digit numeric token is saved in Mini-Redis with a strict 3-minute TTL. Once verified or expired, the key is permanently purged from memory so tokens cannot be intercepted or reused.
+    </p>
+
+    <div class="idea-grid">
+      <div class="idea-col">
+        <h4>How it Uses Mini-Redis C++ Engine:</h4>
+        <ul>
+          <li><span class="code-chip">SET otp:code:&lt;phone&gt; &lt;pin&gt; EX 45</span>: Auto-expiring one-time password in RAM.</li>
+          <li><span class="code-chip">DEL otp:code:&lt;phone&gt;</span>: Single-use invalidation upon successful validation.</li>
+        </ul>
+      </div>
+      <div class="idea-col">
+        <h4>Live Demonstration Highlights for Professor:</h4>
+        <ul>
+          <li><strong>Login Flow:</strong> Generate OTP &rarr; enter code &rarr; verify &rarr; verify again to show rejection.</li>
+          <li><strong>Expired Token Test:</strong> Wait for timer expiry and demonstrate unauthorized access block.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Comparison Table -->
+  <div class="section-heading">Architectural Comparison Matrix</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Application Idea</th>
+          <th>Primary Problem Solved</th>
+          <th>Core C++ Engine Features Used</th>
+          <th>Viva / Demo Wow Factor</th>
+          <th>Current Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-bold">1. URL Shortener (Bitly)</td>
+          <td>O(1) high-throughput link redirection</td>
+          <td>SET, GET, TTL expiry, LRU eviction, AOF logging</td>
+          <td>Instant 302 redirect, Live QR scan on phone</td>
+          <td><span class="ready-star">&#x2605; Ready &amp; Live</span></td>
+        </tr>
+        <tr>
+          <td class="td-bold">2. API Rate Limiter</td>
+          <td>Anti-DDoS, brute-force spam protection</td>
+          <td>Atomic INCR, 60s sliding window TTL, Thread pool</td>
+          <td>Spam flood test, 429 Lockout visual timer</td>
+          <td>Concept Ready</td>
+        </tr>
+        <tr>
+          <td class="td-bold">3. Real-Time Chat &amp; Sessions</td>
+          <td>Low-latency ephemeral messaging &amp; auth</td>
+          <td>Session token TTL, in-memory buffer, TCP sockets</td>
+          <td>Dual-window chat, Session auto-expiry logout</td>
+          <td>Concept Ready</td>
+        </tr>
+        <tr>
+          <td class="td-bold">4. Gaming Leaderboard</td>
+          <td>High-frequency concurrent rank updates</td>
+          <td>Fast key updates, LRU access chains, AOF recovery</td>
+          <td>Live animated rank shuffling on score update</td>
+          <td><span class="ready-star">&#x2605; Ready &amp; Live</span></td>
+        </tr>
+        <tr>
+          <td class="td-bold">5. Ephemeral OTP Service</td>
+          <td>Single-use temporary security tokens</td>
+          <td>Strict TTL auto-purge, Single-use DEL purge</td>
+          <td>OTP expiry rejection, Token replay rejection</td>
+          <td><span class="ready-star">&#x2605; Ready &amp; Live</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Recommendation Box -->
+  <div class="exec-box" style="margin-top: 14px; border-left-color: #16A34A; background: #F0FDF4;">
+    <p><strong>Flagship Viva Recommendation for Dr. Gunjan Chugh:</strong> We strongly recommend evaluating <strong>AuthKV (Ephemeral 2FA &amp; Identity Security Gateway)</strong>. Backed by our C++ in-memory engine, it demonstrates dual-channel real SMS and real email dispatch with microsecond TTL auto-purge and cryptographic single-use DEL eviction. Evaluators can type their own mobile number or email address live during viva and receive their authentic security code on their device in seconds.</p>
+  </div>
+
+  <!-- Document Footer -->
+  <div class="doc-footer">
+    <span>Team RediSetGo &bull; Mini-Redis Project Portfolio</span>
+    <span>Developed for 2nd Year B.Tech CSE Evaluation</span>
+    <span>Page 2 of 2</span>
+  </div>
+
+</body>
+</html>
