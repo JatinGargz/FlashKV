@@ -1,7 +1,7 @@
-#include "engine/StorageEngine.h"
-#include "persistence/AOFManager.h"
-#include "concurrency/ThreadPool.h"
-#include "server/TcpServer.h"
+#include "StorageEngine.h"
+#include "AOFManager.h"
+#include "ThreadPool.h"
+#include "TcpServer.h"
 #include <iostream>
 #include <csignal>
 #include <memory>

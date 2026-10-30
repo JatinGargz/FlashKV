@@ -1,8 +1,8 @@
-#include "engine/DoublyLinkedList.h"
-#include "engine/LRUCache.h"
-#include "engine/StorageEngine.h"
-#include "protocol/CommandParser.h"
-#include "persistence/AOFManager.h"
+#include "DoublyLinkedList.h"
+#include "LRUCache.h"
+#include "StorageEngine.h"
+#include "CommandParser.h"
+#include "AOFManager.h"
 #include <iostream>
 #include <cassert>
 #include <chrono>

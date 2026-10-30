@@ -1,5 +1,5 @@
 #include "AOFManager.h"
-#include "protocol/CommandParser.h"
+#include "CommandParser.h"
 #include <iostream>
 #include <algorithm>
 #include <cstdio>

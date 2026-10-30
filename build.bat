@@ -23,7 +23,7 @@ if %ERRORLEVEL% neq 0 (
     )
 )
 
-set CXXFLAGS=-std=c++17 -O3 -static -static-libgcc -static-libstdc++ -I01_core_cpp_engine
+set CXXFLAGS=-std=c++17 -O3 -static -static-libgcc -static-libstdc++ -Idatabase -Ibackend
 
 echo Using compiler: %GXX%
 echo Flags: %CXXFLAGS%
@@ -31,38 +31,38 @@ echo.
 
 echo [1/4] Compiling flashkv_server.exe...
 %GXX% %CXXFLAGS% ^
-  01_core_cpp_engine/main.cpp ^
-  01_core_cpp_engine/engine/DoublyLinkedList.cpp ^
-  01_core_cpp_engine/engine/LRUCache.cpp ^
-  01_core_cpp_engine/engine/StorageEngine.cpp ^
-  01_core_cpp_engine/protocol/CommandParser.cpp ^
-  01_core_cpp_engine/concurrency/ThreadPool.cpp ^
-  01_core_cpp_engine/persistence/AOFManager.cpp ^
-  01_core_cpp_engine/server/TcpServer.cpp ^
+  backend/server_main.cpp ^
+  database/DoublyLinkedList.cpp ^
+  database/LRUCache.cpp ^
+  database/StorageEngine.cpp ^
+  backend/CommandParser.cpp ^
+  backend/ThreadPool.cpp ^
+  database/AOFManager.cpp ^
+  backend/TcpServer.cpp ^
   -o build/flashkv_server.exe -lws2_32
 if %ERRORLEVEL% neq 0 ( echo [FAILED] flashkv_server compilation failed! & exit /b 1 )
 echo [OK] build/flashkv_server.exe generated.
 
 echo [2/4] Compiling flashkv_client.exe...
-%GXX% %CXXFLAGS% 03_cli_client/FlashKVClient.cpp -o build/flashkv_client.exe -lws2_32
+%GXX% %CXXFLAGS% backend/cli_client.cpp -o build/flashkv_client.exe -lws2_32
 if %ERRORLEVEL% neq 0 ( echo [FAILED] flashkv_client compilation failed! & exit /b 1 )
 echo [OK] build/flashkv_client.exe generated.
 
 echo [3/4] Compiling flashkv_benchmark.exe...
-%GXX% %CXXFLAGS% 04_benchmark_suite/BenchmarkTool.cpp -o build/flashkv_benchmark.exe -lws2_32
+%GXX% %CXXFLAGS% backend/benchmark.cpp -o build/flashkv_benchmark.exe -lws2_32
 if %ERRORLEVEL% neq 0 ( echo [FAILED] flashkv_benchmark compilation failed! & exit /b 1 )
 echo [OK] build/flashkv_benchmark.exe generated.
 
 echo [4/4] Compiling flashkv_tests.exe...
 %GXX% %CXXFLAGS% ^
-  05_unit_tests/UnitTests.cpp ^
-  01_core_cpp_engine/engine/DoublyLinkedList.cpp ^
-  01_core_cpp_engine/engine/LRUCache.cpp ^
-  01_core_cpp_engine/engine/StorageEngine.cpp ^
-  01_core_cpp_engine/protocol/CommandParser.cpp ^
-  01_core_cpp_engine/concurrency/ThreadPool.cpp ^
-  01_core_cpp_engine/persistence/AOFManager.cpp ^
-  01_core_cpp_engine/server/TcpServer.cpp ^
+  backend/unit_tests.cpp ^
+  database/DoublyLinkedList.cpp ^
+  database/LRUCache.cpp ^
+  database/StorageEngine.cpp ^
+  backend/CommandParser.cpp ^
+  backend/ThreadPool.cpp ^
+  database/AOFManager.cpp ^
+  backend/TcpServer.cpp ^
   -o build/flashkv_tests.exe -lws2_32
 if %ERRORLEVEL% neq 0 ( echo [FAILED] flashkv_tests compilation failed! & exit /b 1 )
 echo [OK] build/flashkv_tests.exe generated.

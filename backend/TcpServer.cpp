@@ -1,5 +1,5 @@
 #include "TcpServer.h"
-#include "protocol/CommandParser.h"
+#include "CommandParser.h"
 #include <iostream>
 #include <cstring>
 #include <sstream>

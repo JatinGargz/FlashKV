@@ -1,10 +1,10 @@
 #pragma once
 
 #include "SocketUtils.h"
-#include "engine/StorageEngine.h"
-#include "persistence/AOFManager.h"
-#include "concurrency/ThreadPool.h"
-#include "protocol/Command.h"
+#include "StorageEngine.h"
+#include "AOFManager.h"
+#include "ThreadPool.h"
+#include "Command.h"
 #include <atomic>
 #include <string>
 
