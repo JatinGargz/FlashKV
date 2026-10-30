@@ -1670,13 +1670,29 @@ class handler(http.server.BaseHTTPRequestHandler):
     and Vercel's @vercel/python Serverless Function runtime.
     """
 
+    def _get_clean_path(self):
+        raw = (self.headers.get("x-matched-path") or 
+               self.headers.get("x-vercel-matched-path") or 
+               self.headers.get("x-now-route-matches") or 
+               self.path)
+        p = urllib.parse.urlparse(raw).path.rstrip("/")
+        if not p:
+            return "/"
+        if p in ["/api/index.py", "/api/index", "/api"]:
+            return "/"
+        if p.startswith("/api/index.py/"):
+            p = p[len("/api/index.py"):]
+        elif p.startswith("/api/index/"):
+            p = p[len("/api/index"):]
+        return p
+
     def do_HEAD(self):
         self.do_GET()
 
     def do_GET(self):
-        parsed = urllib.parse.urlparse(self.path)
+        path = self._get_clean_path()
 
-        if parsed.path == "/api/otp/active":
+        if path == "/api/otp/active":
             all_keys = redis_keys()
             otp_keys = [k for k in all_keys if k.startswith("otp:code:")]
             otps = []
@@ -1708,12 +1724,12 @@ class handler(http.server.BaseHTTPRequestHandler):
             self._json(200, {"otps": otps})
             return
 
-        if parsed.path == "/api/config":
+        if path == "/api/config":
             cfg = load_gateway_config()
             self._json(200, cfg)
             return
 
-        if parsed.path == "/api/stats":
+        if path == "/api/stats":
             st = redis_stats()
             lru = redis_lru_order()
             aof_tail = []
@@ -1735,7 +1751,7 @@ class handler(http.server.BaseHTTPRequestHandler):
             return
 
         # Dual-Portal Routing (Sender & Receiver)
-        if parsed.path in ["/", "/index.html", "/sender", "/verify", "/receiver"]:
+        if path in ["/", "/index.html", "/sender", "/verify", "/receiver"] or not path.startswith("/api"):
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
@@ -1748,10 +1764,10 @@ class handler(http.server.BaseHTTPRequestHandler):
         self.wfile.write(b"404 Not Found")
 
     def do_POST(self):
-        parsed = urllib.parse.urlparse(self.path)
+        path = self._get_clean_path()
         body = self._read_json_body()
 
-        if parsed.path == "/api/otp/generate":
+        if path == "/api/otp/generate":
             recipient = body.get("email", "").strip()
             purpose = body.get("purpose", "Two-Factor Authentication").strip()
             ttl = int(body.get("ttl", 60))
@@ -1784,7 +1800,7 @@ class handler(http.server.BaseHTTPRequestHandler):
             })
             return
 
-        if parsed.path == "/api/otp/verify":
+        if path == "/api/otp/verify":
             recipient = body.get("recipient", "").strip().lower()
             entered_code = body.get("code", "").strip()
 
@@ -1820,14 +1836,14 @@ class handler(http.server.BaseHTTPRequestHandler):
                 })
             return
 
-        if parsed.path == "/api/otp/revoke":
+        if path == "/api/otp/revoke":
             recipient = body.get("recipient", "").strip().lower()
             redis_del(f"otp:code:{recipient}")
             redis_del(f"otp:meta:{recipient}")
             self._json(200, {"ok": True, "message": f"Token for {recipient} purged from memory."})
             return
 
-        if parsed.path == "/api/config":
+        if path == "/api/config":
             saved = save_gateway_config(body)
             if saved:
                 self._json(200, {"ok": True, "message": "SMTP configuration updated successfully."})
@@ -1835,7 +1851,7 @@ class handler(http.server.BaseHTTPRequestHandler):
                 self._json(500, {"error": "Failed to persist gateway configuration."})
             return
 
-        if parsed.path == "/api/cli":
+        if path == "/api/cli":
             cmd = body.get("command", "").strip()
             if not cmd:
                 self._json(400, {"error": "No command provided"})
