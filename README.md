@@ -1,5 +1,7 @@
 # FlashKV — High-Performance In-Memory Key-Value Store
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJatinGargz%2FFlashKV)
+
 An industrial-grade, multi-threaded in-memory key-value database engine (Mini-Redis) written in **Modern C++ (C++17)**.
 
 ---
