@@ -1671,6 +1671,17 @@ class handler(http.server.BaseHTTPRequestHandler):
     """
 
     def _get_clean_path(self):
+        # 1. Check query parameter passed by Vercel rewrite (?action=...)
+        parsed_url = urllib.parse.urlparse(self.path)
+        qs = urllib.parse.parse_qs(parsed_url.query)
+        if "action" in qs:
+            act = qs["action"][0].lstrip("/")
+            return "/api/" + act if not act.startswith("api/") else "/" + act
+        if "path" in qs:
+            p_val = qs["path"][0].lstrip("/")
+            return "/api/" + p_val if not p_val.startswith("api/") else "/" + p_val
+
+        # 2. Check path string or proxy headers
         raw = (self.headers.get("x-matched-path") or 
                self.headers.get("x-vercel-matched-path") or 
                self.headers.get("x-invoke-path") or
