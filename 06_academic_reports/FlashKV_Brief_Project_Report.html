@@ -1,8 +1,4 @@
-import os
-import subprocess
-import re
-
-HTML_TEMPLATE = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -394,32 +390,3 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 </body>
 </html>
-"""
-
-def generate_pdf():
-    out_dir = r"C:\Users\Jatin\.gemini\antigravity\scratch\flashkv"
-    html_file = os.path.join(out_dir, "FlashKV_Brief_Project_Report.html")
-    pdf_file = os.path.join(out_dir, "FlashKV_Brief_Project_Report.pdf")
-    
-    with open(html_file, "w", encoding="utf-8") as f:
-        f.write(HTML_TEMPLATE)
-    
-    edge_path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-    cmd = [
-        edge_path,
-        "--headless",
-        "--disable-gpu",
-        "--run-all-compositor-stages-before-draw",
-        "--no-pdf-header-footer",
-        f"--print-to-pdf={pdf_file}",
-        html_file
-    ]
-    subprocess.run(cmd, check=True)
-    
-    with open(pdf_file, "rb") as f:
-        data = f.read()
-    page_count = len(re.findall(rb'/Type\s*/Page\b', data))
-    print(f"Generated PDF with {page_count} pages.")
-
-if __name__ == "__main__":
-    generate_pdf()

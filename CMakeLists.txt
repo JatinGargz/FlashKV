@@ -18,28 +18,28 @@ endif()
 
 # Core library sources
 set(FLASHKV_CORE_SRCS
-    src/engine/DoublyLinkedList.cpp
-    src/engine/LRUCache.cpp
-    src/engine/StorageEngine.cpp
-    src/protocol/CommandParser.cpp
-    src/concurrency/ThreadPool.cpp
-    src/persistence/AOFManager.cpp
-    src/server/TcpServer.cpp
+    01_core_cpp_engine/engine/DoublyLinkedList.cpp
+    01_core_cpp_engine/engine/LRUCache.cpp
+    01_core_cpp_engine/engine/StorageEngine.cpp
+    01_core_cpp_engine/protocol/CommandParser.cpp
+    01_core_cpp_engine/concurrency/ThreadPool.cpp
+    01_core_cpp_engine/persistence/AOFManager.cpp
+    01_core_cpp_engine/server/TcpServer.cpp
 )
 
-include_directories(src)
+include_directories(01_core_cpp_engine)
 
 # Server Executable
-add_executable(flashkv_server src/main.cpp ${FLASHKV_CORE_SRCS})
+add_executable(flashkv_server 01_core_cpp_engine/main.cpp ${FLASHKV_CORE_SRCS})
 
 # Interactive CLI Client
-add_executable(flashkv_client client/FlashKVClient.cpp)
+add_executable(flashkv_client 03_cli_client/FlashKVClient.cpp)
 
 # Benchmark Tool
-add_executable(flashkv_benchmark benchmark/BenchmarkTool.cpp)
+add_executable(flashkv_benchmark 04_benchmark_suite/BenchmarkTool.cpp)
 
 # Unit Tests Executable
-add_executable(flashkv_tests tests/UnitTests.cpp ${FLASHKV_CORE_SRCS})
+add_executable(flashkv_tests 05_unit_tests/UnitTests.cpp ${FLASHKV_CORE_SRCS})
 
 # Link libraries (Winsock for Windows, pthreads for Linux)
 if (WIN32)

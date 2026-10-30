@@ -17,5 +17,5 @@ echo   --^> Sender Portal   : http://localhost:5000/
 echo   --^> Receiver Portal : http://localhost:5000/verify
 echo.
 start "" "http://localhost:5000/"
-python "gui\urlshortener.py"
+python "02_web_2fa_gateway\auth_gateway.py"
 pause
