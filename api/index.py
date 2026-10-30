@@ -1673,17 +1673,15 @@ class handler(http.server.BaseHTTPRequestHandler):
     def _get_clean_path(self):
         raw = (self.headers.get("x-matched-path") or 
                self.headers.get("x-vercel-matched-path") or 
-               self.headers.get("x-now-route-matches") or 
+               self.headers.get("x-invoke-path") or
                self.path)
-        p = urllib.parse.urlparse(raw).path.rstrip("/")
-        if not p:
+        p = urllib.parse.urlparse(raw).path
+        for action in ["/api/otp/generate", "/api/otp/verify", "/api/otp/active", "/api/otp/revoke", "/api/config", "/api/stats", "/api/cli"]:
+            if action in p:
+                return action
+        p = p.rstrip("/")
+        if not p or p in ["/api/index.py", "/api/index", "/api", "/index.html"]:
             return "/"
-        if p in ["/api/index.py", "/api/index", "/api"]:
-            return "/"
-        if p.startswith("/api/index.py/"):
-            p = p[len("/api/index.py"):]
-        elif p.startswith("/api/index/"):
-            p = p[len("/api/index"):]
         return p
 
     def do_HEAD(self):

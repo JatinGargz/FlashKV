@@ -2,6 +2,22 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/sender",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/verify",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/receiver",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
+    },
+    {
       "source": "/(.*)",
       "destination": "/api/index.py"
     }
